@@ -1,0 +1,29 @@
+.error {
+    color: red;
+    outline-color: red;
+    background-color: lightgray;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.message {
+    color: green;
+    outline-color: green;
+    background-color: lightgray;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.blog {
+    padding-top: 5px;
+    padding-left: 2px;
+    border: solid;
+    border-width: 1px;
+    margin-bottom: 5;
+}
