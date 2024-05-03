@@ -9,24 +9,19 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  create-envfile:
- 
+  create_env_file_job:
     runs-on: ubuntu-latest
- 
     steps:
-    - name: Make envfile
-      uses: SpicyPizza/create-envfile@v1
-      with:
-        envkey_MONGODB_URI: ${{ secrets.MONGODB_URI }}
-        envkey_TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
-        envkey_PORT: ${{ secrets.PORT }}
-        envkey_SECRET: ${{ secrets.SECRET }}
-        file_name: .env
-        fail_on_empty: false
-        sort_keys: false
+      - name: Create .env file
+        uses: ozaytsev86/create-env-file@v1
+        with:
+          ENV_MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          ENV_TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+          ENV_PORT: ${{ secrets.PORT }}
+          ENV_SECRET: ${{ secrets.SECRET }}
 
   simple_deployment_pipeline:
-    needs: [create-envfile]
+    needs: [create_env_file_job]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
