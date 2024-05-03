@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 app.get('/health', (req, res) => {
-  res.send('ok')
+  res.send('Im good here')
 })
 
 
