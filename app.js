@@ -24,6 +24,11 @@ if (process.env.NODE_ENV === 'test') {
   app.use('/api/testing', testing_router)
 }
 
+app.get('/health', (req, res) => {
+  res.send('ok')
+})
+
+
 app.use(middleware.error_handler)
 
 module.exports = app
