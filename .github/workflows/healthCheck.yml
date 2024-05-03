@@ -1,0 +1,14 @@
+name: Health check
+
+on:
+  schedule:
+    - cron: '0 20 * * *'
+
+jobs:
+  health_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check deployed service URL
+        uses: jtalk/url-health-check-action@v4
+        with:
+          url: https://bloglist-n5c3.onrender.com
