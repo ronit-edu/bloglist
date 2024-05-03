@@ -9,20 +9,20 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  create_env_file_job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Create env file'
-        run: |
-          touch .env
-          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
-          echo TEST_MONGOD_URI=${{ secrets.TEST_MONGOD_URI }} >> .env
-          echo PORT=${{ secrets.PORT }} >> .env
-          echo SECRET=${{ secrets.SECRET }} >> .env
-          cat .env
+#   create_env_file_job:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: 'Create env file'
+#         run: |
+#           touch .env
+#           echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
+#           echo TEST_MONGOD_URI=${{ secrets.TEST_MONGOD_URI }} >> .env
+#           echo PORT=${{ secrets.PORT }} >> .env
+#           echo SECRET=${{ secrets.SECRET }} >> .env
+#           cat .env
 
   simple_deployment_pipeline:
-    needs: [create_env_file_job]
+    # needs: [create_env_file_job]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,6 +36,11 @@ jobs:
       - name: build
         run: npm run build
       - name: test
+        env:
+          MONGODB_URI: ${{secrets.MONGODB_URI}}
+          TEST_MONGODB_URI: ${{secrets.TEST_MONGODB_URI}}
+          PORT: ${{secrets.PORT}}
+          SECRET: ${{secrets.SECRET}}
         run: npm run test
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip')}}
