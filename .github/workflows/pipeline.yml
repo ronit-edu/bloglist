@@ -10,15 +10,14 @@ on:
 
 jobs:
   create_env_file_job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create .env file
-        uses: ozaytsev86/create-env-file@v1
-        with:
-          ENV_MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          ENV_TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
-          ENV_PORT: ${{ secrets.PORT }}
-          ENV_SECRET: ${{ secrets.SECRET }}
+    - name: 'Create env file'
+      run: |
+        touch .env
+        echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
+        echo TEST_MONGOD_URI=${{ secrets.TEST_MONGOD_URI }} >> .env
+        echo PORT=${{ secrets.PORT }} >> .env
+        echo SECRET=${{ secrets.SECRET }} >> .env
+        echo cat .env
 
   simple_deployment_pipeline:
     needs: [create_env_file_job]
