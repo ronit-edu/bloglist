@@ -15,7 +15,7 @@ jobs:
  
     steps:
     - name: Make envfile
-      uses: SpicyPizza/create-envfile@v2.0
+      uses: SpicyPizza/create-envfile@v1
       with:
         envkey_MONGODB_URI: ${{ secrets.MONGODB_URI }}
         envkey_TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
